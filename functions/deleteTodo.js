@@ -5,6 +5,11 @@ const { DELETE_TODO } = require("./util/todoQueries");
 const formattedResponse = require("./util/formattedResponse");
 
 exports.handler = async (event) => {
+  // to make sure that the user enter http method is delete
+  if (event.httpMethod !== "DELETE") {
+    return formattedResponse(405, { err: "Http MEthod is not supported" });
+  }
+  
   const { _id: id } = JSON.parse(event.body);
   const variables = { id };
 
