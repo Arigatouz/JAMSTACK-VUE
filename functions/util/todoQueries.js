@@ -11,8 +11,8 @@ query {
  }
 }`;
 const CREATE_TODO = `
-    mutation($name: String!, $urls: String!, $description: String! ) {
-        createTodo( data: { name:$name, urls: $urls, description: $description, finished: false }) {
+    mutation($name: String!, $urls: String!, $description: String!,$finished : Boolean ) {
+        createTodo( data: { name:$name, urls: $urls, description: $description, finished: $finished }) {
             name
             description
             urls
@@ -20,7 +20,7 @@ const CREATE_TODO = `
             _id
         }
     }
-`; 
+`;
 const UPDATE_TODO = `
   mutation($id: ID!, $finished: Boolean!, $name: String!, $urls: String!, $description: String!  ) {
         updateTodo( id: $id, data: { name:$name, urls: $urls, description: $description, finished: $finished }) {
@@ -41,10 +41,9 @@ const DELETE_TODO = `
     }
 `;
 
-
 module.exports = {
   GET_TODO,
   CREATE_TODO,
   UPDATE_TODO,
-  DELETE_TODO
+  DELETE_TODO,
 };

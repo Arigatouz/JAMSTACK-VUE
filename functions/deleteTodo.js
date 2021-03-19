@@ -9,15 +9,16 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "DELETE") {
     return formattedResponse(405, { err: "Http MEthod is not supported" });
   }
-  
-  const { _id: id } = JSON.parse(event.body);
-  const variables = { id };
 
+  const { _id: id } = JSON.parse(event.body);
+  // console.log(id);
+  const variables = { id };
+  console.log(`variables is >>> ${variables}`);
   try {
     const { deleteTodo: deletedTodo } = await sendQuery(DELETE_TODO, variables);
     return formattedResponse(200, deletedTodo);
   } catch (err) {
     console.error(err.message);
-    return formattedResponse(500, { err: "something Went Wrong" });
+    return formattedResponse(500, { err: "something Went Wrong In Deleting" });
   }
 };
